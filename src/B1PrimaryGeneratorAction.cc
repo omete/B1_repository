@@ -107,8 +107,8 @@ void B1PrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
   b = 1*mm;
   ap = 0.001*mrad;
   bp = 0.001*mrad;
-  alpha0 =-10; 
-  G4double z0 = -5*cm;
+  alpha0 =0; 
+  G4double z0 = 0;
   G4double x0 = G4RandGauss::shoot(0,a);
   G4double y0 = G4RandGauss::shoot(0,b);
   //

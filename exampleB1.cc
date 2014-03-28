@@ -39,6 +39,7 @@
 
 #include "G4UImanager.hh"
 #include "QBBC.hh"
+#include "B1PhysicsList.hh"
 
 #ifdef G4VIS_USE
 #include "G4VisExecutive.hh"
@@ -71,11 +72,16 @@ int main(int argc,char** argv)
   // Detector construction
   runManager->SetUserInitialization(new B1DetectorConstruction());
 
-  // Physics list
-  G4VModularPhysicsList* physicsList = new QBBC;
-  physicsList->SetVerboseLevel(1);
+  // Physics list original
+  //G4VModularPhysicsList* physicsList = new QBBC;
+  //physicsList->SetVerboseLevel(1);
+  //runManager->SetUserInitialization(physicsList);
+  //  
+  // Physics list from M. Labishe and O.Mete
+  B1PhysicsList* physicsList = new B1PhysicsList();
+    //physicsList->SetVerboseLevel(1);
   runManager->SetUserInitialization(physicsList);
-    
+
   // User action initialization
   runManager->SetUserInitialization(new B1ActionInitialization());
 
