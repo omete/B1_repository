@@ -120,7 +120,7 @@ G4VPhysicalVolume* B1DetectorConstruction::Construct()
                     checkOverlaps);          //overlaps checking
  
   //     
-  // Shape 1
+  // Plasma Section
   // 
   // Material definition by using NIST database 
   G4Material* shape1_mat = nist->FindOrBuildMaterial("G4_Li");
@@ -158,12 +158,12 @@ G4VPhysicalVolume* B1DetectorConstruction::Construct()
   // //////////////////////////////////////////////////////////////
   // ---> Material add until here
 
-  G4ThreeVector pos1 = G4ThreeVector(0, 0, 250*m);
+  // Cylinder section 1 /////////////////////////////////////////////
+  G4ThreeVector pos1 = G4ThreeVector(0, 0, 25*m);
         
-  // Cylinder section shape       
   G4double shape1_rmina =  0.*mm, shape1_rmaxa = 100.*mm;
   G4double shape1_rminb =  0.*mm, shape1_rmaxb = 100.*mm;
-  G4double shape1_hz = 250.*m;
+  G4double shape1_hz = 25.*m;
   G4double shape1_phimin = 0.*deg, shape1_phimax = 360.*deg;
   G4Cons* solidShape1 =    
     new G4Cons("Shape1", 
@@ -184,7 +184,28 @@ G4VPhysicalVolume* B1DetectorConstruction::Construct()
                     0,                       //copy number
                     checkOverlaps);          //overlaps checking
                 
-  
+    // Cylinder section 2 /////////////////////////////////////////////
+    G4ThreeVector pos2 = G4ThreeVector(0, 0, 75*m);
+    
+    G4Cons* solidShape2 =
+    new G4Cons("Shape2",
+               shape1_rmina, shape1_rmaxa, shape1_rminb, shape1_rmaxb, shape1_hz,
+               shape1_phimin, shape1_phimax);
+    
+    G4LogicalVolume* logicShape2 =
+    new G4LogicalVolume(solidShape2,         //its solid
+                        plasma,          //its material
+                        "Shape2");           //its name
+    
+    new G4PVPlacement(0,                       //no rotation
+                      pos1,                    //at position
+                      logicShape1,             //its logical volume
+                      "Shape2",                //its name
+                      logicEnv,                //its mother  volume
+                      false,                   //no boolean operation
+                      0,                       //copy number
+                      checkOverlaps);          //overlaps checking
+    
   fScoringVolume = logicShape1;
 
   //
