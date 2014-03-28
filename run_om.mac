@@ -1,0 +1,26 @@
+# Macro file for example B1
+# 
+# To be run preferably in batch, without graphics:
+# % exampleB1 run_om.mac
+#
+# The opacity for the plasma block
+/vis/geometry/set/forceWireframe Shape1 0  True
+
+# Direct the output into a file
+#/control/cout/setCoutFile "dataOut.txt"
+
+# Saving the plot
+# #####
+# set print mode to vectored
+#/vis/ogl/set/printMode vectored
+# set print size larger than screen
+#/vis/ogl/set/printSize 2000 2000
+# print
+#/vis/ogl/printEPS
+# #####
+# Tracking options
+/tracking/verbose 1
+
+# Run
+/gun/particle e-
+/run/beamOn 1000
