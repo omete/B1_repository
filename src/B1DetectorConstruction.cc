@@ -158,6 +158,10 @@ G4VPhysicalVolume* B1DetectorConstruction::Construct()
   // //////////////////////////////////////////////////////////////
   // ---> Material add until here
 
+    
+  // //////////////////////////////////////////////////////////////
+  // ---> Start defining plasma section here in subsections
+ 
   // Cylinder section 1 /////////////////////////////////////////////
   G4ThreeVector pos1 = G4ThreeVector(0, 0, 25*m);
         
@@ -198,15 +202,196 @@ G4VPhysicalVolume* B1DetectorConstruction::Construct()
                         "Shape2");           //its name
     
     new G4PVPlacement(0,                       //no rotation
-                      pos1,                    //at position
-                      logicShape1,             //its logical volume
+                      pos2,                    //at position
+                      logicShape2,             //its logical volume
                       "Shape2",                //its name
                       logicEnv,                //its mother  volume
                       false,                   //no boolean operation
                       0,                       //copy number
                       checkOverlaps);          //overlaps checking
+
     
-  fScoringVolume = logicShape1;
+    // Cylinder section 3 /////////////////////////////////////////////
+    G4ThreeVector pos3 = G4ThreeVector(0, 0, 125*m);
+    
+    G4Cons* solidShape3 =
+    new G4Cons("Shape3",
+               shape1_rmina, shape1_rmaxa, shape1_rminb, shape1_rmaxb, shape1_hz,
+               shape1_phimin, shape1_phimax);
+    
+    G4LogicalVolume* logicShape3 =
+    new G4LogicalVolume(solidShape3,         //its solid
+                        plasma,          //its material
+                        "Shape3");           //its name
+    
+    new G4PVPlacement(0,                       //no rotation
+                      pos3,                    //at position
+                      logicShape3,             //its logical volume
+                      "Shape3",                //its name
+                      logicEnv,                //its mother  volume
+                      false,                   //no boolean operation
+                      0,                       //copy number
+                      checkOverlaps);          //overlaps checking
+    
+    // Cylinder section 4 /////////////////////////////////////////////
+    G4ThreeVector pos4 = G4ThreeVector(0, 0, 175*m);
+    
+    G4Cons* solidShape4 =
+    new G4Cons("Shape4",
+               shape1_rmina, shape1_rmaxa, shape1_rminb, shape1_rmaxb, shape1_hz,
+               shape1_phimin, shape1_phimax);
+    
+    G4LogicalVolume* logicShape4 =
+    new G4LogicalVolume(solidShape4,         //its solid
+                        plasma,          //its material
+                        "Shape4");           //its name
+    
+    new G4PVPlacement(0,                       //no rotation
+                      pos4,                    //at position
+                      logicShape4,             //its logical volume
+                      "Shape4",                //its name
+                      logicEnv,                //its mother  volume
+                      false,                   //no boolean operation
+                      0,                       //copy number
+                      checkOverlaps);          //overlaps checking
+
+    // Cylinder section 5 /////////////////////////////////////////////
+    G4ThreeVector pos5 = G4ThreeVector(0, 0, 225*m);
+    
+    G4Cons* solidShape5 =
+    new G4Cons("Shape5",
+               shape1_rmina, shape1_rmaxa, shape1_rminb, shape1_rmaxb, shape1_hz,
+               shape1_phimin, shape1_phimax);
+    
+    G4LogicalVolume* logicShape5 =
+    new G4LogicalVolume(solidShape5,         //its solid
+                        plasma,          //its material
+                        "Shape5");           //its name
+    
+    new G4PVPlacement(0,                       //no rotation
+                      pos5,                    //at position
+                      logicShape5,             //its logical volume
+                      "Shape5",                //its name
+                      logicEnv,                //its mother  volume
+                      false,                   //no boolean operation
+                      0,                       //copy number
+                      checkOverlaps);          //overlaps checking
+
+    
+    // Cylinder section 6 /////////////////////////////////////////////
+    G4ThreeVector pos6 = G4ThreeVector(0, 0, 275*m);
+    
+    G4Cons* solidShape6 =
+    new G4Cons("Shape6",
+               shape1_rmina, shape1_rmaxa, shape1_rminb, shape1_rmaxb, shape1_hz,
+               shape1_phimin, shape1_phimax);
+    
+    G4LogicalVolume* logicShape6 =
+    new G4LogicalVolume(solidShape6,         //its solid
+                        plasma,          //its material
+                        "Shape6");           //its name
+    
+    new G4PVPlacement(0,                       //no rotation
+                      pos6,                    //at position
+                      logicShape6,             //its logical volume
+                      "Shape6",                //its name
+                      logicEnv,                //its mother  volume
+                      false,                   //no boolean operation
+                      0,                       //copy number
+                      checkOverlaps);          //overlaps checking
+    
+    // Cylinder section 7 /////////////////////////////////////////////
+    G4ThreeVector pos7 = G4ThreeVector(0, 0, 325*m);
+    
+    G4Cons* solidShape7 =
+    new G4Cons("Shape7",
+               shape1_rmina, shape1_rmaxa, shape1_rminb, shape1_rmaxb, shape1_hz,
+               shape1_phimin, shape1_phimax);
+    
+    G4LogicalVolume* logicShape7 =
+    new G4LogicalVolume(solidShape7,         //its solid
+                        plasma,          //its material
+                        "Shape7");           //its name
+    
+    new G4PVPlacement(0,                       //no rotation
+                      pos7,                    //at position
+                      logicShape7,             //its logical volume
+                      "Shape7",                //its name
+                      logicEnv,                //its mother  volume
+                      false,                   //no boolean operation
+                      0,                       //copy number
+                      checkOverlaps);          //overlaps checking
+
+    // Cylinder section 8 /////////////////////////////////////////////
+    G4ThreeVector pos8 = G4ThreeVector(0, 0, 375*m);
+    
+    G4Cons* solidShape8 =
+    new G4Cons("Shape8",
+               shape1_rmina, shape1_rmaxa, shape1_rminb, shape1_rmaxb, shape1_hz,
+               shape1_phimin, shape1_phimax);
+    
+    G4LogicalVolume* logicShape8 =
+    new G4LogicalVolume(solidShape8,         //its solid
+                        plasma,          //its material
+                        "Shape8");           //its name
+    
+    new G4PVPlacement(0,                       //no rotation
+                      pos8,                    //at position
+                      logicShape8,             //its logical volume
+                      "Shape8",                //its name
+                      logicEnv,                //its mother  volume
+                      false,                   //no boolean operation
+                      0,                       //copy number
+                      checkOverlaps);          //overlaps checking
+
+    // Cylinder section 9 /////////////////////////////////////////////
+    G4ThreeVector pos9 = G4ThreeVector(0, 0, 425*m);
+    
+    G4Cons* solidShape9 =
+    new G4Cons("Shape9",
+               shape1_rmina, shape1_rmaxa, shape1_rminb, shape1_rmaxb, shape1_hz,
+               shape1_phimin, shape1_phimax);
+    
+    G4LogicalVolume* logicShape9 =
+    new G4LogicalVolume(solidShape9,         //its solid
+                        plasma,          //its material
+                        "Shape9");           //its name
+    
+    new G4PVPlacement(0,                       //no rotation
+                      pos9,                    //at position
+                      logicShape9,             //its logical volume
+                      "Shape9",                //its name
+                      logicEnv,                //its mother  volume
+                      false,                   //no boolean operation
+                      0,                       //copy number
+                      checkOverlaps);          //overlaps checking
+
+    // Cylinder section 10 /////////////////////////////////////////////
+    G4ThreeVector pos10 = G4ThreeVector(0, 0, 475*m);
+    
+    G4Cons* solidShape10 =
+    new G4Cons("Shape10",
+               shape1_rmina, shape1_rmaxa, shape1_rminb, shape1_rmaxb, shape1_hz,
+               shape1_phimin, shape1_phimax);
+    
+    G4LogicalVolume* logicShape10 =
+    new G4LogicalVolume(solidShape10,         //its solid
+                        plasma,          //its material
+                        "Shape10");           //its name
+    
+    new G4PVPlacement(0,                       //no rotation
+                      pos10,                    //at position
+                      logicShape10,             //its logical volume
+                      "Shape10",                //its name
+                      logicEnv,                //its mother  volume
+                      false,                   //no boolean operation
+                      0,                       //copy number
+                      checkOverlaps);          //overlaps checking
+    
+    
+    
+    
+  fScoringVolume = logicShape10;
 
   //
   //always return the physical World
