@@ -65,7 +65,7 @@ G4VPhysicalVolume* B1DetectorConstruction::Construct()
   
   // Envelope parameters
   //
-  G4double env_sizeXY = 250*mm, env_sizeZ = 500*m;
+  G4double env_sizeXY = 250*mm, env_sizeZ = 10*m;
   G4Material* env_mat = nist->FindOrBuildMaterial("G4_Galactic");
    
   // Option to switch on/off checking of volumes overlaps
@@ -163,11 +163,11 @@ G4VPhysicalVolume* B1DetectorConstruction::Construct()
   // ---> Start defining plasma section here in subsections
  
   // Cylinder section 1 /////////////////////////////////////////////
-  G4ThreeVector pos1 = G4ThreeVector(0, 0, 25*m);
+  G4ThreeVector pos1 = G4ThreeVector(0, 0, 5*m);
         
   G4double shape1_rmina =  0.*mm, shape1_rmaxa = 100.*mm;
   G4double shape1_rminb =  0.*mm, shape1_rmaxb = 100.*mm;
-  G4double shape1_hz = 25.*m;
+  G4double shape1_hz = 5.*m;
   G4double shape1_phimin = 0.*deg, shape1_phimax = 360.*deg;
   G4Cons* solidShape1 =    
     new G4Cons("Shape1", 
@@ -187,8 +187,10 @@ G4VPhysicalVolume* B1DetectorConstruction::Construct()
                     false,                   //no boolean operation
                     0,                       //copy number
                     checkOverlaps);          //overlaps checking
-                
+
+    
     // Cylinder section 2 /////////////////////////////////////////////
+    /*
     G4ThreeVector pos2 = G4ThreeVector(0, 0, 75*m);
     
     G4Cons* solidShape2 =
@@ -212,7 +214,7 @@ G4VPhysicalVolume* B1DetectorConstruction::Construct()
 
     
     // Cylinder section 3 /////////////////////////////////////////////
-    /*
+    
     G4ThreeVector pos3 = G4ThreeVector(0, 0, 125*m);
     
     G4Cons* solidShape3 =
