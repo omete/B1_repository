@@ -212,6 +212,7 @@ G4VPhysicalVolume* B1DetectorConstruction::Construct()
 
     
     // Cylinder section 3 /////////////////////////////////////////////
+    /*
     G4ThreeVector pos3 = G4ThreeVector(0, 0, 125*m);
     
     G4Cons* solidShape3 =
@@ -388,10 +389,10 @@ G4VPhysicalVolume* B1DetectorConstruction::Construct()
                       0,                       //copy number
                       checkOverlaps);          //overlaps checking
     
+ */
     
     
-    
-  fScoringVolume = logicShape10;
+    fScoringVolume = logicShape1;
 
   //
   //always return the physical World
