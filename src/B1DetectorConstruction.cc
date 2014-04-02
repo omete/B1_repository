@@ -44,6 +44,8 @@
 #include "G4LogicalVolume.hh"
 #include "G4PVPlacement.hh"
 #include "G4SystemOfUnits.hh"
+// Added by O.Mete
+#include "G4ParticleGun.hh"
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
@@ -66,7 +68,7 @@ G4VPhysicalVolume* B1DetectorConstruction::Construct()
   
   // Envelope parameters
   //
-  G4double env_sizeXY = 250*mm, env_sizeZ = 50*m;
+  G4double env_sizeXY = 250*mm, env_sizeZ = 500*m;
   G4Material* env_mat = nist->FindOrBuildMaterial("G4_Galactic");
    
   // Option to switch on/off checking of volumes overlaps
@@ -164,6 +166,11 @@ G4VPhysicalVolume* B1DetectorConstruction::Construct()
   // ---> Start defining plasma section here in subsections
  
   // Cylinder section 1 /////////////////////////////////////////////
+  
+  G4double E0 = 143.65*GeV;
+  //G4double Ee = G4RandGauss::shoot(E0,0.005*E0);
+  fParticleGun->SetParticleEnergy(E0);
+    
   G4ThreeVector pos1 = G4ThreeVector(0, 0, 25.*m);
         
   G4double shape1_rmin =  0.*mm;
@@ -192,13 +199,14 @@ G4VPhysicalVolume* B1DetectorConstruction::Construct()
                     checkOverlaps);          //overlaps checking
                 
     // Cylinder section 2 /////////////////////////////////////////////
-    /*
-    G4ThreeVector pos2 = G4ThreeVector(0, 0, 75*m);
+    G4ThreeVector pos2 = G4ThreeVector(0, 0, 75.*m);
     
-    G4Cons* solidShape2 =
-    new G4Cons("Shape2",
-               shape1_rmina, shape1_rmaxa, shape1_rminb, shape1_rmaxb, shape1_hz,
-               shape1_phimin, shape1_phimax);
+    G4Tubs* solidShape2 = new G4Tubs("Shape2",
+                                     shape1_rmin,
+                                     shape1_rmax,
+                                     shape1_hz,
+                                     shape1_phimin,
+                                     shape1_phimax);
     
     G4LogicalVolume* logicShape2 =
     new G4LogicalVolume(solidShape2,         //its solid
@@ -213,15 +221,16 @@ G4VPhysicalVolume* B1DetectorConstruction::Construct()
                       false,                   //no boolean operation
                       0,                       //copy number
                       checkOverlaps);          //overlaps checking
-
     
     // Cylinder section 3 /////////////////////////////////////////////
-    G4ThreeVector pos3 = G4ThreeVector(0, 0, 125*m);
+    G4ThreeVector pos3 = G4ThreeVector(0, 0, 125.*m);
     
-    G4Cons* solidShape3 =
-    new G4Cons("Shape3",
-               shape1_rmina, shape1_rmaxa, shape1_rminb, shape1_rmaxb, shape1_hz,
-               shape1_phimin, shape1_phimax);
+    G4Tubs* solidShape3 = new G4Tubs("Shape3",
+                                     shape1_rmin,
+                                     shape1_rmax,
+                                     shape1_hz,
+                                     shape1_phimin,
+                                     shape1_phimax);
     
     G4LogicalVolume* logicShape3 =
     new G4LogicalVolume(solidShape3,         //its solid
@@ -238,12 +247,14 @@ G4VPhysicalVolume* B1DetectorConstruction::Construct()
                       checkOverlaps);          //overlaps checking
     
     // Cylinder section 4 /////////////////////////////////////////////
-    G4ThreeVector pos4 = G4ThreeVector(0, 0, 175*m);
-    
-    G4Cons* solidShape4 =
-    new G4Cons("Shape4",
-               shape1_rmina, shape1_rmaxa, shape1_rminb, shape1_rmaxb, shape1_hz,
-               shape1_phimin, shape1_phimax);
+    G4ThreeVector pos4 = G4ThreeVector(0, 0, 175.*m);
+
+    G4Tubs* solidShape4 = new G4Tubs("Shape4",
+                                     shape1_rmin,
+                                     shape1_rmax,
+                                     shape1_hz,
+                                     shape1_phimin,
+                                     shape1_phimax);
     
     G4LogicalVolume* logicShape4 =
     new G4LogicalVolume(solidShape4,         //its solid
@@ -258,14 +269,16 @@ G4VPhysicalVolume* B1DetectorConstruction::Construct()
                       false,                   //no boolean operation
                       0,                       //copy number
                       checkOverlaps);          //overlaps checking
-
-    // Cylinder section 5 /////////////////////////////////////////////
-    G4ThreeVector pos5 = G4ThreeVector(0, 0, 225*m);
     
-    G4Cons* solidShape5 =
-    new G4Cons("Shape5",
-               shape1_rmina, shape1_rmaxa, shape1_rminb, shape1_rmaxb, shape1_hz,
-               shape1_phimin, shape1_phimax);
+    // Cylinder section 5 /////////////////////////////////////////////
+    G4ThreeVector pos5 = G4ThreeVector(0, 0, 225.*m);
+    
+    G4Tubs* solidShape5 = new G4Tubs("Shape5",
+                                     shape1_rmin,
+                                     shape1_rmax,
+                                     shape1_hz,
+                                     shape1_phimin,
+                                     shape1_phimax);
     
     G4LogicalVolume* logicShape5 =
     new G4LogicalVolume(solidShape5,         //its solid
@@ -283,12 +296,14 @@ G4VPhysicalVolume* B1DetectorConstruction::Construct()
 
     
     // Cylinder section 6 /////////////////////////////////////////////
-    G4ThreeVector pos6 = G4ThreeVector(0, 0, 275*m);
+    G4ThreeVector pos6 = G4ThreeVector(0, 0, 275.*m);
     
-    G4Cons* solidShape6 =
-    new G4Cons("Shape6",
-               shape1_rmina, shape1_rmaxa, shape1_rminb, shape1_rmaxb, shape1_hz,
-               shape1_phimin, shape1_phimax);
+    G4Tubs* solidShape6 = new G4Tubs("Shape6",
+                                     shape1_rmin,
+                                     shape1_rmax,
+                                     shape1_hz,
+                                     shape1_phimin,
+                                     shape1_phimax);
     
     G4LogicalVolume* logicShape6 =
     new G4LogicalVolume(solidShape6,         //its solid
@@ -303,14 +318,16 @@ G4VPhysicalVolume* B1DetectorConstruction::Construct()
                       false,                   //no boolean operation
                       0,                       //copy number
                       checkOverlaps);          //overlaps checking
-    
+
     // Cylinder section 7 /////////////////////////////////////////////
-    G4ThreeVector pos7 = G4ThreeVector(0, 0, 325*m);
+    G4ThreeVector pos7 = G4ThreeVector(0, 0, 325.*m);
     
-    G4Cons* solidShape7 =
-    new G4Cons("Shape7",
-               shape1_rmina, shape1_rmaxa, shape1_rminb, shape1_rmaxb, shape1_hz,
-               shape1_phimin, shape1_phimax);
+    G4Tubs* solidShape7 = new G4Tubs("Shape7",
+                                     shape1_rmin,
+                                     shape1_rmax,
+                                     shape1_hz,
+                                     shape1_phimin,
+                                     shape1_phimax);
     
     G4LogicalVolume* logicShape7 =
     new G4LogicalVolume(solidShape7,         //its solid
@@ -327,12 +344,14 @@ G4VPhysicalVolume* B1DetectorConstruction::Construct()
                       checkOverlaps);          //overlaps checking
 
     // Cylinder section 8 /////////////////////////////////////////////
-    G4ThreeVector pos8 = G4ThreeVector(0, 0, 375*m);
+    G4ThreeVector pos8 = G4ThreeVector(0, 0, 375.*m);
     
-    G4Cons* solidShape8 =
-    new G4Cons("Shape8",
-               shape1_rmina, shape1_rmaxa, shape1_rminb, shape1_rmaxb, shape1_hz,
-               shape1_phimin, shape1_phimax);
+    G4Tubs* solidShape8 = new G4Tubs("Shape8",
+                                     shape1_rmin,
+                                     shape1_rmax,
+                                     shape1_hz,
+                                     shape1_phimin,
+                                     shape1_phimax);
     
     G4LogicalVolume* logicShape8 =
     new G4LogicalVolume(solidShape8,         //its solid
@@ -347,14 +366,16 @@ G4VPhysicalVolume* B1DetectorConstruction::Construct()
                       false,                   //no boolean operation
                       0,                       //copy number
                       checkOverlaps);          //overlaps checking
-
-    // Cylinder section 9 /////////////////////////////////////////////
-    G4ThreeVector pos9 = G4ThreeVector(0, 0, 425*m);
     
-    G4Cons* solidShape9 =
-    new G4Cons("Shape9",
-               shape1_rmina, shape1_rmaxa, shape1_rminb, shape1_rmaxb, shape1_hz,
-               shape1_phimin, shape1_phimax);
+    // Cylinder section 9 /////////////////////////////////////////////
+    G4ThreeVector pos9 = G4ThreeVector(0, 0, 425.*m);
+    
+    G4Tubs* solidShape9 = new G4Tubs("Shape9",
+                                     shape1_rmin,
+                                     shape1_rmax,
+                                     shape1_hz,
+                                     shape1_phimin,
+                                     shape1_phimax);
     
     G4LogicalVolume* logicShape9 =
     new G4LogicalVolume(solidShape9,         //its solid
@@ -371,12 +392,14 @@ G4VPhysicalVolume* B1DetectorConstruction::Construct()
                       checkOverlaps);          //overlaps checking
 
     // Cylinder section 10 /////////////////////////////////////////////
-    G4ThreeVector pos10 = G4ThreeVector(0, 0, 475*m);
+    G4ThreeVector pos10 = G4ThreeVector(0, 0, 475.*m);
     
-    G4Cons* solidShape10 =
-    new G4Cons("Shape10",
-               shape1_rmina, shape1_rmaxa, shape1_rminb, shape1_rmaxb, shape1_hz,
-               shape1_phimin, shape1_phimax);
+    G4Tubs* solidShape10 = new G4Tubs("Shape10",
+                                     shape1_rmin,
+                                     shape1_rmax,
+                                     shape1_hz,
+                                     shape1_phimin,
+                                     shape1_phimax);
     
     G4LogicalVolume* logicShape10 =
     new G4LogicalVolume(solidShape10,         //its solid
@@ -392,10 +415,8 @@ G4VPhysicalVolume* B1DetectorConstruction::Construct()
                       0,                       //copy number
                       checkOverlaps);          //overlaps checking
     
-  */  
     
-    
-  fScoringVolume = logicShape1;
+  fScoringVolume = logicShape10;
 
   //
   //always return the physical World

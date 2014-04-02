@@ -133,9 +133,9 @@ void B1PrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
 
 
   // Set particle energy
-  G4double E0 = 143.65*GeV;
+  //G4double E0 = 143.65*GeV;
   //G4double Ee = G4RandGauss::shoot(E0,0.005*E0);
-  fParticleGun->SetParticleEnergy(E0);
+  //fParticleGun->SetParticleEnergy(E0);
   // //////////
 
   fParticleGun->GeneratePrimaryVertex(anEvent);
