@@ -103,19 +103,19 @@ void B1PrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
 
   
   G4double a,b,ap,bp,alpha0;
-  a = 46.646*mm;
-  b = 46.646*mm;
-  ap = 0.963*mrad;
-  bp = 0.963*mrad;
-  alpha0 =0.777; 
+  a = 1*mm;
+  b = 1*mm;
+  ap = 1*mrad;
+  bp = 1*mrad;
+  alpha0 =-10;
   G4double z0 = 0;
   G4double x0 = G4RandGauss::shoot(0,a);
   G4double y0 = G4RandGauss::shoot(0,b);
   //
-  //G4double xp0 = G4RandGauss::shoot(0.,ap)-alpha0*x0;
+  G4double xp0 = G4RandGauss::shoot(0.,ap)-alpha0*x0;
   //G4double xp0 =  G4RandGauss::shoot(0.,ap);
   //G4double xp0 = 0;
-  //G4double yp0 = G4RandGauss::shoot(0.,bp)-alpha0*y0;
+  G4double yp0 = G4RandGauss::shoot(0.,bp)-alpha0*y0;
   //G4double yp0 = G4RandGauss::shoot(0.,bp);
   //G4double yp0 = 0;
   //
@@ -123,13 +123,15 @@ void B1PrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
 
   // Initial angular distribution
   //fParticleGun->SetParticleMomentumDirection(G4ThreeVector(sin(xp0)*cos(yp0),sin(xp0)*sin(yp0),cos(yp0)));
-  G4double phi    = G4RandGauss::shoot(0,CLHEP::pi);
-  G4double theta  = G4RandGauss::shoot(0,ap);
+  //G4double phi    = G4RandGauss::shoot(0,CLHEP::pi);
+  //G4double theta  = G4RandGauss::shoot(0,ap);
   //G4double sinTheta = sqrt(1. - cosTheta * cosTheta);
-  G4double ux= sin(theta) * cos(phi);
-  G4double uy= sin(theta) * sin(phi);
-  G4double uz= cos(theta);
-  fParticleGun->SetParticleMomentumDirection(G4ThreeVector(ux,uy,uz));
+  //G4double ux= sin(theta) * cos(phi);
+  //G4double uy= sin(theta) * sin(phi);
+  //G4double uz= cos(theta);
+  //fParticleGun->SetParticleMomentumDirection(G4ThreeVector(ux,uy,uz));
+  G4double costheta = std::sqrt(1-std::sin(xp0)*std::sin(xp0));
+  fParticleGun->SetParticleMomentumDirection(G4ThreeVector(cos(yp0)*sin(xp0),sin(yp0)*sin(xp0),costheta);
 
 
   // Set particle energy
