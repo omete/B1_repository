@@ -56,8 +56,8 @@ B1PrimaryGeneratorAction::B1PrimaryGeneratorAction()
   G4ParticleDefinition* particle
     = particleTable->FindParticle(particleName="e-");
   fParticleGun->SetParticleDefinition(particle);
-  fParticleGun->SetParticleMomentumDirection(G4ThreeVector(0.,0.,1));
-  fParticleGun->SetParticleEnergy(10.*GeV);
+  //fParticleGun->SetParticleMomentumDirection(G4ThreeVector(0.,0.,1));
+  //fParticleGun->SetParticleEnergy(10*GeV);
 }
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
@@ -103,28 +103,41 @@ void B1PrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
 
   
   G4double a,b,ap,bp,alpha0;
-  a = 1*mm;
-  b = 1*mm;
-  ap = 0.001*mrad;
-  bp = 0.001*mrad;
-  alpha0 =0; 
+  a = 46.646*mm;
+  b = 46.646*mm;
+  ap = 0.963*mrad;
+  bp = 0.963*mrad;
+  alpha0 =0.777; 
   G4double z0 = 0;
   G4double x0 = G4RandGauss::shoot(0,a);
   G4double y0 = G4RandGauss::shoot(0,b);
   //
   //G4double xp0 = G4RandGauss::shoot(0.,ap)-alpha0*x0;
   //G4double xp0 =  G4RandGauss::shoot(0.,ap);
-  G4double xp0 = 0;
-  G4double yp0 = G4RandGauss::shoot(0.,bp)-alpha0*y0;
+  //G4double xp0 = 0;
+  //G4double yp0 = G4RandGauss::shoot(0.,bp)-alpha0*y0;
   //G4double yp0 = G4RandGauss::shoot(0.,bp);
   //G4double yp0 = 0;
   //
   fParticleGun->SetParticlePosition(G4ThreeVector(x0,y0,z0));
 
   // Initial angular distribution
-  fParticleGun->SetParticleMomentumDirection(G4ThreeVector(sin(xp0)*cos(yp0),sin(xp0)*sin(yp0),cos(xp0)));
+  //fParticleGun->SetParticleMomentumDirection(G4ThreeVector(sin(xp0)*cos(yp0),sin(xp0)*sin(yp0),cos(yp0)));
+  G4double phi    = G4RandGauss::shoot(0,CLHEP::pi);
+  G4double theta  = G4RandGauss::shoot(0,ap);
+  //G4double sinTheta = sqrt(1. - cosTheta * cosTheta);
+  G4double ux= sin(theta) * cos(phi);
+  G4double uy= sin(theta) * sin(phi);
+  G4double uz= cos(theta);
+  fParticleGun->SetParticleMomentumDirection(G4ThreeVector(ux,uy,uz));
 
+
+  // Set particle energy
+  G4double E0 = 143.65*GeV;
+  //G4double Ee = G4RandGauss::shoot(E0,0.005*E0);
+  fParticleGun->SetParticleEnergy(E0);
   // //////////
+
   fParticleGun->GeneratePrimaryVertex(anEvent);
 }
 

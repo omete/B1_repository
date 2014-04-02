@@ -39,6 +39,7 @@
 #include "G4Cons.hh"
 #include "G4Orb.hh"
 #include "G4Sphere.hh"
+#include "G4Tubs.hh"
 #include "G4Trd.hh"
 #include "G4LogicalVolume.hh"
 #include "G4PVPlacement.hh"
@@ -65,7 +66,7 @@ G4VPhysicalVolume* B1DetectorConstruction::Construct()
   
   // Envelope parameters
   //
-  G4double env_sizeXY = 250*mm, env_sizeZ = 10*m;
+  G4double env_sizeXY = 250*mm, env_sizeZ = 50*m;
   G4Material* env_mat = nist->FindOrBuildMaterial("G4_Galactic");
    
   // Option to switch on/off checking of volumes overlaps
@@ -163,16 +164,18 @@ G4VPhysicalVolume* B1DetectorConstruction::Construct()
   // ---> Start defining plasma section here in subsections
  
   // Cylinder section 1 /////////////////////////////////////////////
-  G4ThreeVector pos1 = G4ThreeVector(0, 0, 5*m);
+  G4ThreeVector pos1 = G4ThreeVector(0, 0, 25.*m);
         
-  G4double shape1_rmina =  0.*mm, shape1_rmaxa = 100.*mm;
-  G4double shape1_rminb =  0.*mm, shape1_rmaxb = 100.*mm;
-  G4double shape1_hz = 5.*m;
+  G4double shape1_rmin =  0.*mm;
+  G4double shape1_rmax =  100.*mm;
+  G4double shape1_hz = 25.*m;
   G4double shape1_phimin = 0.*deg, shape1_phimax = 360.*deg;
-  G4Cons* solidShape1 =    
-    new G4Cons("Shape1", 
-    shape1_rmina, shape1_rmaxa, shape1_rminb, shape1_rmaxb, shape1_hz,
-    shape1_phimin, shape1_phimax);
+  G4Tubs* solidShape1 = new G4Tubs("Shape1", 
+                                    shape1_rmin, 
+                                    shape1_rmax, 
+                                    shape1_hz,
+                                    shape1_phimin, 
+                                    shape1_phimax);
                       
   G4LogicalVolume* logicShape1 =                         
     new G4LogicalVolume(solidShape1,         //its solid
@@ -187,8 +190,7 @@ G4VPhysicalVolume* B1DetectorConstruction::Construct()
                     false,                   //no boolean operation
                     0,                       //copy number
                     checkOverlaps);          //overlaps checking
-
-    
+                
     // Cylinder section 2 /////////////////////////////////////////////
     /*
     G4ThreeVector pos2 = G4ThreeVector(0, 0, 75*m);
@@ -214,7 +216,6 @@ G4VPhysicalVolume* B1DetectorConstruction::Construct()
 
     
     // Cylinder section 3 /////////////////////////////////////////////
-    
     G4ThreeVector pos3 = G4ThreeVector(0, 0, 125*m);
     
     G4Cons* solidShape3 =
@@ -391,10 +392,10 @@ G4VPhysicalVolume* B1DetectorConstruction::Construct()
                       0,                       //copy number
                       checkOverlaps);          //overlaps checking
     
- */
+  */  
     
     
-    fScoringVolume = logicShape1;
+  fScoringVolume = logicShape1;
 
   //
   //always return the physical World
