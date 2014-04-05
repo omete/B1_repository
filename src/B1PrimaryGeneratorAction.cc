@@ -100,44 +100,38 @@ void B1PrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
     G4Exception("B1PrimaryGeneratorAction::GeneratePrimaries()",
      "MyCode0002",JustWarning,msg);
   }
-
   
   G4double a,b,ap,bp,alpha0;
-  a = 1*mm;
-  b = 1*mm;
-  ap = 1*mrad;
-  bp = 1*mrad;
-  alpha0 =-10;
+  a = 5.8412*mm;
+  b = 5.8412*mm;
+  ap = 0.077842*mrad;
+  bp = 0.077842*mrad;
+  alpha0 =1.0044;
   G4double z0 = 0;
   G4double x0 = G4RandGauss::shoot(0,a);
   G4double y0 = G4RandGauss::shoot(0,b);
   //
-  G4double xp0 = G4RandGauss::shoot(0.,ap)-alpha0*x0;
-  //G4double xp0 =  G4RandGauss::shoot(0.,ap);
+  //G4double xp0 = G4RandGauss::shoot(0.,ap)-alpha0*x0;
+  G4double xp0 =  G4RandGauss::shoot(0.,ap);
   //G4double xp0 = 0;
-  G4double yp0 = G4RandGauss::shoot(0.,bp)-alpha0*y0;
-  //G4double yp0 = G4RandGauss::shoot(0.,bp);
+  //G4double yp0 = G4RandGauss::shoot(0.,bp)-alpha0*y0;
+  G4double yp0 = G4RandGauss::shoot(0.,bp);
   //G4double yp0 = 0;
   //
   fParticleGun->SetParticlePosition(G4ThreeVector(x0,y0,z0));
 
   // Initial angular distribution
-  //fParticleGun->SetParticleMomentumDirection(G4ThreeVector(sin(xp0)*cos(yp0),sin(xp0)*sin(yp0),cos(yp0)));
-  //G4double phi    = G4RandGauss::shoot(0,CLHEP::pi);
-  //G4double theta  = G4RandGauss::shoot(0,ap);
-  //G4double sinTheta = sqrt(1. - cosTheta * cosTheta);
-  //G4double ux= sin(theta) * cos(phi);
-  //G4double uy= sin(theta) * sin(phi);
-  //G4double uz= cos(theta);
-  //fParticleGun->SetParticleMomentumDirection(G4ThreeVector(ux,uy,uz));
+  
   G4double costheta = std::sqrt(1-std::sin(xp0)*std::sin(xp0));
-  fParticleGun->SetParticleMomentumDirection(G4ThreeVector(cos(yp0)*sin(xp0),sin(yp0)*sin(xp0),costheta);
-
-
+  // Use for y axis later
+  //fParticleGun->SetParticleMomentumDirection(G4ThreeVector(cos(yp0)*sin(xp0),sin(yp0)*sin(xp0),costheta));
+  // Only x axis is under study
+  fParticleGun->SetParticleMomentumDirection(G4ThreeVector(sin(xp0),0.,costheta));
+ 
   // Set particle energy
-  //G4double E0 = 143.65*GeV;
+  G4double E0 = 173.35*GeV;
   //G4double Ee = G4RandGauss::shoot(E0,0.005*E0);
-  //fParticleGun->SetParticleEnergy(E0);
+  fParticleGun->SetParticleEnergy(E0);
   // //////////
 
   fParticleGun->GeneratePrimaryVertex(anEvent);
