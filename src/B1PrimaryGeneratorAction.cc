@@ -102,11 +102,11 @@ void B1PrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
   }
   
   G4double a,b,ap,bp,alpha0;
-  a = 5.8412*mm;
-  b = 5.8412*mm;
-  ap = 0.077842*mrad;
-  bp = 0.077842*mrad;
-  alpha0 =1.0044;
+  a = 1*mm;
+  b = 1*mm;
+  ap = 1*mrad;
+  bp = 1*mrad;
+  alpha0 = 10;
   G4double z0 = 0;
   G4double x0 = G4RandGauss::shoot(0,a);
   G4double y0 = G4RandGauss::shoot(0,b);
@@ -129,7 +129,7 @@ void B1PrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
   fParticleGun->SetParticleMomentumDirection(G4ThreeVector(sin(xp0),0.,costheta));
  
   // Set particle energy
-  G4double E0 = 173.35*GeV;
+  G4double E0 = 10*GeV;
   //G4double Ee = G4RandGauss::shoot(E0,0.005*E0);
   fParticleGun->SetParticleEnergy(E0);
   // //////////
